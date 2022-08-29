@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="bd">
+        <div id="ust">
+            <img id="logo" src="data:image/jpeg;base64,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">
+            <div id="filter_global" class="flx2">
+                <i class="fa-solid fa-magnifying-glass icolor"></i>
+                <input type="text" class="global_filter" id="global_filter" placeholder=" Ara">
+            </div>
+            <div>
+                <select name="platform" class="dropd1" id="platform">
+                    <option>n11</option>
+                    <option>trendyol</option>
+                    <option>hepsiburada</option>
+                    <option>gittigitmiyor</option>
+                  </select>
+            </div>
+            <div>
+                <select name="goster" class="dropd1" id="goster">
+                    <option>Hepsini göster</option>
+                    <option>işlem bekleyen ürünler</option>
+                    <option>sadece basit ürünler</option>
+                    <option>sadece stoğu olan ürünler</option>
+                    <option>sadece stoğu biten ürünler</option>
+                    <option>sadece aktif ürünler</option>
+                    <option>sadece pasif ürünler</option>
+                  </select>
+            </div>
+            <div>
+                <button id="ekle"><i class="fa-solid fa-plus"></i> Yeni Ürün Ekle</button>
+            </div>
+            <div>
+                <select name="Toplu İşlemler" class="dropd2" id="TopluIslem">
+                    <option selected>Toplu İşlemler</option>
+                    <option>Seçilen ürünleri sil</option>
+                    <option>Tüm ürünleri sil</option>
+                    <option>Seçilen ürünleri stoğa aç</option>
+                    <option>Seçilen ürünleri stoğa kapa</option>
+                    <option>Tüm ürünleri stoğa aç</option>
+                    <option>Tüm ürünleri stoğa kapa</option>
+                  </select>
+            </div>
+        </div>
+        <div id="alt">  
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <th>Ürün Adı</th>
+                    <th>Stok Kodu</th>
+                    <th>Stok Miktarı</th>
+                    <th>Barkod Kodu</th>
+                    <th>Satış Fiyatı</th>
+                    <th>Stok Takip</th>
+                    <th>Durumu</th>
+                    <th>Düzenle</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div><input type="text" class="column_filter" id="col0_filter" placeholder="Ürün Adı"></div></td>
+                        <td><div></div><input type="text" class="column_filter" id="col1_filter" placeholder="Stok Kodu"></div></td>
+                        <td><div></div><input type="text" class="column_filter" id="col2_filter" placeholder="Stok Miktarı"></div></td>
+                        <td><div></div><input type="text" class="column_filter" id="col3_filter" placeholder="Barkod Kodu"></div></td>
+                        <td><div></div><input type="text" class="column_filter" id="col4_filter" placeholder="Satış Fiyatı"></div></td>
+                        <td><div></div><input type="text" class="column_filter" id="col5_filter" placeholder="Stok Takip"></div></td>
+                        <td><div></div><input type="text" class="column_filter" id="col6_filter" placeholder="Durumu"></div></td>
+                        <td><div></div><input type="text" class="column_filter" id="col7_filter" placeholder="Düzenle"></div></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>
+                            <div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> 
+                                <div>
+                                    <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p>
+                                    <div class="logoflx">
+                                        <img class="logolar" src="http://ortakpazar.pro/images/mobile-icon/gittigidiyor.png" alt="gittigidiyor">
+                                        <img class="logolar" src="http://ortakpazar.pro/images/mobile-icon/getircarsi.png" alt="getir">
+                                        <img class="logolar" src="http://ortakpazar.pro/images/mobile-icon/workgroup.png" alt="workgroup">
+                                    </div>
+                                </div>  
+                            </div>
+                        </td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>
+                            <div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492756_0.jpg">
+                                <div>
+                                    <p>100*38 KARTON RAF ETİKETİ 3'LÜ PAKET( 3 Adet)</p> 
+                                    <div class="logoflx">
+                                        <img class="logolar" src="http://ortakpazar.pro/images/mobile-icon/gittigidiyor.png" alt="gittigidiyor">
+                                        <img class="logolar" src="http://ortakpazar.pro/images/mobile-icon/getircarsi.png" alt="getir">
+                                        <img class="logolar" src="http://ortakpazar.pro/images/mobile-icon/workgroup.png" alt="workgroup">
+                                        <img class="logolar" src="http://ortakpazar.pro/images/mobile-icon/trendyolpazaryeri.png" alt="trendyolpazaryeri">
+                                        <img class="logolar" src="http://ortakpazar.pro/images/mobile-icon/trendyolhizlimarket.webp" alt="trendyol">
+                                        <img class="logolar" src="https://pbs.twimg.com/profile_images/1541745307758825472/PzZN0DKy_400x400.jpg" alt="n11">
+                                    </div>
+                                </div> 
+                            </div>
+                        </td>
+                        <td>100*38 KARTON</td>
+                        <td>0</td>
+                        <td>100*38 KARTON</td>
+                        <td>65.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492755_0.jpg"> <p>40x58Mm Eco Termal Etiket Paket (5 Adet)</p> </div></td>
+                        <td>Tanex 40x58Mm</td>
+                        <td>0</td>
+                        <td>Tanex 40x58Mm</td>
+                        <td>130.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492769_0.jpg"> <p>Aclass Ls2 15 KG Barkodlu Terazi </p> </div></td>
+                        <td>AclassLS2</td>
+                        <td>5</td>
+                        <td>AclassLS2</td>
+                        <td>13270.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492746_0_thumb.jpg"> <p>Argox OS-214EX Termal Barkod Yazıcı  </p> </div></td>
+                        <td>ARGOX OS214EX</td>
+                        <td>100</td>
+                        <td>ARGOX OS214EX</td>
+                        <td>6082.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492765_0_thumb.jpg"> <p>Cas Cl 3000 Barkodlu Terazi. 30 KG Terazi. 15 KG Terazi  </p> </div></td>
+                        <td>CL3000</td>
+                        <td>20</td>
+                        <td>CL3000</td>
+                        <td>9500.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492765_0_thumb.jpg"> <p>Cas Cl 3000 Barkodlu Terazi. 30 KG Terazi. 15 KG Terazi  </p> </div></td>
+                        <td>CL3000</td>
+                        <td>20</td>
+                        <td>CL3000</td>
+                        <td>9500.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492765_0_thumb.jpg"> <p>Cas Cl 3000 Barkodlu Terazi. 30 KG Terazi. 15 KG Terazi  </p> </div></td>
+                        <td>CL3000</td>
+                        <td>20</td>
+                        <td>CL3000</td>
+                        <td>9500.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492765_0_thumb.jpg"> <p>Cas Cl 3000 Barkodlu Terazi. 30 KG Terazi. 15 KG Terazi  </p> </div></td>
+                        <td>CL3000</td>
+                        <td>20</td>
+                        <td>CL3000</td>
+                        <td>9500.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492765_0_thumb.jpg"> <p>Cas Cl 3000 Barkodlu Terazi. 30 KG Terazi. 15 KG Terazi  </p> </div></td>
+                        <td>CL3000</td>
+                        <td>20</td>
+                        <td>CL3000</td>
+                        <td>9500.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492765_0_thumb.jpg"> <p>Cas Cl 3000 Barkodlu Terazi. 30 KG Terazi. 15 KG Terazi  </p> </div></td>
+                        <td>CL3000</td>
+                        <td>20</td>
+                        <td>CL3000</td>
+                        <td>9500.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492765_0_thumb.jpg"> <p>Cas Cl 3000 Barkodlu Terazi. 30 KG Terazi. 15 KG Terazi  </p> </div></td>
+                        <td>CL3000</td>
+                        <td>20</td>
+                        <td>CL3000</td>
+                        <td>9500.50</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><div class="flx1"><img class="im1" src="https://app.shopside.io/images/6187/1492772_0.jpg"> <p>Cas Sw Iı Cr Terazi. 15Kg Terazi </p> </div></td>
+                        <td>CASSW</td>
+                        <td>99</td>
+                        <td>CASSW</td>
+                        <td>1806.00</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td><p class="aktif">aktif</p></td>
+                        <td><button class="editbut eye"><i class="fa-solid fa-eye"></i></button><button class="editbut edit"><i class="fa-solid fa-pen"></i></button><button class="editbut delete"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                </tbody>            
+            </table>
+        </div>  
+    </div>
+    <div class="toggleBtn"><i class="fa-solid fa-moon"></i></div>
+    <script src="script.js"></script>
+</body>
+</html>
